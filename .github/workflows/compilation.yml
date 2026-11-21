@@ -30,7 +30,7 @@ jobs:
     env:
       HAS_CERT: ${{ secrets.MACOS_CERTIFICATE != '' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Certificat Apple (si configuré)
         env:
@@ -55,16 +55,17 @@ jobs:
           APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
         run: ./installateur/creer_dmg_mac.sh
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: JSG-Guitar-Mac
           path: installateur/sortie/JSG Guitar.dmg
+          if-no-files-found: error
 
   windows:
     name: Windows (installateur)
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Inno Setup
         run: choco install innosetup --no-progress -y
@@ -73,16 +74,17 @@ jobs:
         shell: cmd
         run: installateur\tout_compiler.bat
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: JSG-Guitar-Windows
           path: installateur/sortie/JSG Guitar Setup.exe
+          if-no-files-found: error
 
   linux:
     name: Vérification (Linux)
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Compilation de la version de test
         run: |
           cmake -S sources -B build -DCMAKE_BUILD_TYPE=Release
@@ -103,10 +105,10 @@ jobs:
     needs: [ mac, windows ]
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v7
         with:
           path: fichiers
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: |
             fichiers/JSG-Guitar-Mac/JSG Guitar.dmg
