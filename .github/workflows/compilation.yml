@@ -26,7 +26,7 @@ permissions:
 jobs:
   mac:
     name: Mac (.dmg)
-    runs-on: macos-14
+    runs-on: macos-latest
     env:
       HAS_CERT: ${{ secrets.MACOS_CERTIFICATE != '' }}
     steps:
