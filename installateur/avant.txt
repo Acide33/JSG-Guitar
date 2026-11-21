@@ -1,0 +1,25 @@
+﻿JSG GUITAR — simulateur d'ampli guitare et basse
+
+Créé par Jérôme Soler, guitariste du Jérôme Soler Group (JSG).
+Site du groupe : jeromesolergroup.com
+
+CE QUI VA ÊTRE INSTALLÉ (chaque partie peut être décochée à l'étape suivante)
+- Le logiciel JSG Guitar, dans Program Files.
+- Le plug-in VST3, dans C:\Program Files\Common Files\VST3, pour votre logiciel
+  musical (relancez ensuite sa recherche de plug-ins).
+- Les playbacks JSG, si cette version de l'installateur les contient : 8 morceaux
+  du groupe sans la guitare.
+
+LICENCES
+- JSG Guitar est un logiciel libre et gratuit, sous licence GNU GPL version 3 :
+  vous pouvez l'utiliser, l'étudier, le modifier et le redistribuer.
+- Les images de l'interface, les noms et les logos restent la propriété du groupe.
+- Les playbacks JSG sont sous licence Creative Commons BY-NC 4.0 : partage et
+  remix autorisés en créditant le groupe, pas d'usage commercial.
+Les textes complets sont installés avec le logiciel.
+
+CONFIGURATION
+Windows 10 ou 11 64 bits, une carte son avec entrée instrument, un casque ou
+des enceintes.
+
+Si JSG Guitar vous plaît : écoutez et partagez la musique du groupe !

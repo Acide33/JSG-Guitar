@@ -1,0 +1,66 @@
+JSG GUITAR POUR MAC (PROTOTYPE 0.1)
+===================================
+
+Simulateur d'ampli guitare et basse, gratuit et libre (licence GPL v3).
+Créé par Jérôme Soler, guitariste du Jérôme Soler Group — jeromesolergroup.com
+
+Configuration : macOS 12 (Monterey) ou plus récent, Mac Apple (M1, M2, M3, M4…)
+ou Mac Intel, une carte son avec entrée instrument (ou l'entrée du Mac).
+
+
+INSTALLATION
+------------
+Glissez « JSG Guitar » sur le dossier « Applications ».
+
+
+PREMIER LANCEMENT
+-----------------
+1. Ouvrez JSG Guitar depuis le dossier Applications.
+
+2. Si macOS affiche « Apple n'a pas pu vérifier… » (version non signée par Apple) :
+   cliquez sur « Terminé », puis ouvrez Réglages Système > Confidentialité et
+   sécurité, descendez jusqu'à « JSG Guitar a été bloqué » et cliquez sur
+   « Ouvrir quand même ». Il ne le demande qu'une fois.
+
+3. macOS demande l'accès au micro : cliquez sur « Autoriser ». C'est ce qui permet
+   à JSG Guitar d'entendre votre guitare (l'entrée de la carte son est vue comme
+   un « micro »). Refusé par erreur ? Réglages Système > Confidentialité et
+   sécurité > Micro > activez JSG Guitar, puis relancez.
+
+
+RÉGLAGES DU SON
+---------------
+TOOLS > RÉGLAGES AUDIO : entrée, sortie, tampon, fréquence, canal de la guitare.
+- La plus faible latence : la même carte son (USB) pour l'entrée et la sortie.
+- Si le son craque : augmentez le tampon (128 ou 256).
+- Les autres logiciels gardent le son pendant que JSG Guitar tourne.
+
+
+PLAYBACKS JSG
+-------------
+Les 8 morceaux du groupe sans la guitare forment un pack gratuit à part
+(licence CC BY-NC 4.0), sur jeromesolergroup.com. Copiez ses fichiers MP3 dans :
+    Musique / JSG Guitar / Playbacks
+(dossier créé par JSG Guitar au premier lancement), puis relancez.
+
+
+ENREGISTREMENTS
+---------------
+Bouton REC : WAV 24 bits ou AAC (.m4a, 320 ou 192 kbit/s), dans
+    Musique / JSG Guitar
+macOS n'a pas d'encodeur MP3 : la version Mac enregistre en AAC, lisible partout
+(Musique, VLC, téléphones, YouTube…).
+
+
+FICHIERS DE JSG GUITAR
+----------------------
+Réglages audio et journal : ~/Bibliothèque/Application Support/JSG Guitar
+(Finder > Aller > Aller au dossier…, puis coller ce chemin).
+Pour désinstaller : glissez JSG Guitar à la corbeille, et ce dossier aussi si
+vous voulez effacer les réglages.
+
+
+À VÉRIFIER (pas encore essayé sur un vrai Mac)
+----------------------------------------------
+Cette version a été écrite et testée sans Mac. Notez votre modèle de Mac, votre
+version de macOS et votre carte son si quelque chose cloche.

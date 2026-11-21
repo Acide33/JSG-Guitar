@@ -1,0 +1,41 @@
+# Dossiers de compilation
+sources/build/
+sources/build_win/
+sources/moteur/*.wasm
+build/
+out/
+
+# Fichiers produits par Visual Studio
+.vs/
+*.user
+*.suo
+*.obj
+*.o
+*.pdb
+*.ilk
+*.exp
+*.lib
+
+# Exécutable : il se publie dans les Releases, pas dans le code
+*.exe
+/WebView2Loader.dll
+
+# Système
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Pack de playbacks (distribué à part, licence CC BY-NC 4.0)
+ui/playbacks/*.mp3
+
+# Plug-in VST3 : kit Steinberg téléchargé et compilation
+sources/plugin/vst3sdk/
+sources/plugin/build/
+
+# Installateur produit
+installateur/sortie/
+installateur/fichiers/
+installateur/playbacks/
+
+# Compilation Mac
+sources/build-mac/

@@ -1,0 +1,119 @@
+JSG GUITAR — VERSION PC (PROTOTYPE 0.1)
+=======================================
+
+Le même simulateur que la version navigateur (même moteur audio, même
+interface), mais le son passe directement par la carte son en WASAPI,
+avec le mode exclusif de Windows pour la latence la plus basse.
+JSG Guitar est un logiciel libre (licence GPLv3, voir LICENSE). Les images
+restent la propriété du groupe (LICENCE-CONTENUS.md).
+
+PLAYBACKS JSG : les 8 morceaux du groupe sans la guitare forment un pack
+gratuit à part (licence CC BY-NC 4.0), sur jeromesolergroup.com. Copiez son
+dossier « playbacks » dans le dossier « ui » de JSG Guitar, puis relancez.
+
+
+LANCER
+------
+1. Branchez la guitare dans la carte son, mettez un casque.
+2. Double-cliquez sur « JSG Guitar.exe » (le dossier « ui » et
+   WebView2Loader.dll doivent rester à côté). JSG Guitar s'ouvre dans sa
+   propre fenêtre.
+3. Choisissez GUITARE ou BASSE. Le son démarre tout de suite (pas
+   d'autorisation à donner, pas de serveur à lancer).
+4. Pour arrêter : fermez la fenêtre.
+
+La fenêtre retient sa position et sa taille. Le bouton plein écran de
+l'interface la passe en plein écran (Échap pour revenir).
+
+Au premier lancement, Windows SmartScreen peut afficher « Windows a protégé
+votre ordinateur » : cliquez sur « Informations complémentaires » puis
+« Exécuter quand même ». Ce message disparaît avec les versions signées.
+
+
+MESURER ET BAISSER LA LATENCE
+-----------------------------
+TOOLS > RÉGLAGES AUDIO (ou le menu ⚙) :
+- Entrée / Sortie : la même carte son pour les deux (c'est le plus stable
+  et le plus rapide).
+- Mode : Exclusif = latence la plus faible. JSG Guitar prend la carte pour
+  lui seul. « Libérer la carte son » la rend sans fermer le programme.
+- Tampon : de 32 à 512 échantillons. Descendez jusqu'à ce que ça craque,
+  puis remontez d'un cran. Windows impose un minimum propre à chaque carte
+  (souvent 3 ms pour une carte intégrée) : en dessous, il est ignoré.
+- La fenêtre affiche la latence annoncée par Windows.
+
+LA VRAIE LATENCE : bouton « Mesurer la latence réelle… »
+Reliez une sortie de la carte son à l'entrée guitare avec un câble jack,
+baissez le casque, cliquez sur Mesurer. JSG Guitar envoie 10 clics et
+chronomètre leur retour : c'est le délai réel entre la corde et l'oreille,
+convertisseurs compris. Repères :
+    moins de 10 ms   imperceptible
+    10 à 15 ms       la plupart des guitaristes ne le sentent pas
+    plus de 20 ms    perceptible
+
+Si le son craque : le message « l'entrée a pris du retard N fois » apparaît
+dans les réglages ; augmentez le tampon d'un cran.
+
+
+CE QUI CHANGE PAR RAPPORT À LA VERSION NAVIGATEUR
+-------------------------------------------------
+Lecteur : les 8 playbacks JSG sans guitare (pack à télécharger), et trois volumes : le morceau, la
+guitare (pour l'équilibrer avec le morceau) et le volume général (l'ensemble).
+Double-clic sur un curseur : valeur de départ. Ces volumes restent actifs
+sur toutes les pages : si le son semble faible, vérifiez le volume général.
+
+En plus : mode exclusif WASAPI, choix du tampon et de la fréquence,
+changement de tonalité du lecteur (en demi-tons, sans changer la vitesse),
+enregistrements REC rangés directement dans Musique\JSG Guitar, en WAV
+24 bits ou en MP3 320 / 192 kbit/s (menu ▼ à côté de REC > Format).
+Le MP3 est fait par l'encodeur intégré à Windows, juste après l'arrêt
+(le bouton affiche « MP3… » quelques secondes). S'il échoue, la prise est
+gardée en WAV et un message l'indique.
+Pas encore : plug-ins (CLAP prévu), boîte à rythmes, séparation des pistes.
+
+
+OÙ SONT LES FICHIERS
+--------------------
+%LOCALAPPDATA%\JSG Guitar\audio.ini      réglages de la carte son
+%LOCALAPPDATA%\JSG Guitar\journal.txt    journal (démarrage du son, erreurs)
+%LOCALAPPDATA%\JSG Guitar\WebView2\      profil de la fenêtre (presets, IR)
+%LOCALAPPDATA%\JSG Guitar\fenetre.txt    position et taille de la fenêtre
+Musique\JSG Guitar\                      enregistrements REC (WAV ou MP3)
+
+Pour tout remettre à zéro : fermez JSG Guitar et supprimez le dossier
+%LOCALAPPDATA%\JSG Guitar (tapez-le dans la barre d'adresse de l'Explorateur).
+
+
+COMMENT ÇA MARCHE
+-----------------
+JSG Guitar.exe fait le son (WASAPI, moteur C++) et sert l'interface sur
+http://127.0.0.1:47811, accessible uniquement depuis ce PC. La fenêtre
+affiche cette interface avec WebView2, le moteur web intégré à Windows 10
+et 11 (le même que celui d'Edge, mais sans extensions ni barre d'adresse).
+Le son, lui, ne passe jamais par la fenêtre.
+
+Si WebView2 manque (Windows 10 jamais mis à jour), l'interface s'ouvre dans
+une fenêtre Edge à la place. WebView2 s'installe gratuitement depuis le site
+de Microsoft : « Microsoft Edge WebView2 Runtime ».
+
+Pour le dépannage : lancez JSG Guitar avec la variable d'environnement
+JSG_DEVTOOLS=1 pour avoir le clic droit et les outils de développement (F12).
+
+
+RECOMPILER (dossier sources)
+----------------------------
+Avec Visual Studio 2022 (charge de travail « Développement Desktop en C++ ») :
+double-cliquez sur sources\build.bat. Résultat : sources\build\Release\
+JSG Guitar.exe, avec le dossier ui et WebView2Loader.dll copiés à côté.
+Ou à la main :
+    cmake -B build -A x64
+    cmake --build build --config Release
+
+Le programme ne dépend que de Windows 10/11 (aucun redistribuable à
+installer).
+
+sources\moteur  : le moteur audio, commun avec la version navigateur
+                  (moteur\build.sh recompile le .wasm de la version web)
+sources\src     : WASAPI, serveur local, lecteur, enregistreur, décodage
+sources\third_party : dr_wav, dr_mp3, dr_flac (lecture WAV/MP3/FLAC),
+                  webview2 (en-tête et chargeur WebView2 de Microsoft)

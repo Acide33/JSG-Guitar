@@ -1,0 +1,9 @@
+Dossier des playbacks JSG
+=========================
+
+Les 8 playbacks du Jérôme Soler Group (les morceaux sans la guitare) sont
+distribués à part, dans le pack gratuit « JSG Playbacks » (licence CC BY-NC 4.0),
+disponible sur jeromesolergroup.com.
+
+Copiez ici les fichiers MP3 du pack (le nom des fichiers ne doit pas changer),
+puis relancez JSG Guitar : ils apparaissent dans la page LECTEUR.

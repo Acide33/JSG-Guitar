@@ -1,0 +1,72 @@
+JSG GUITAR — PLUG-IN VST3 (PROTOTYPE 0.1)
+=========================================
+
+Le simulateur JSG Guitar dans votre logiciel musical (Reaper, Cubase,
+Studio One, FL Studio, Ableton Live, Bitwig…) : même moteur et même
+interface que la version PC. Logiciel libre (GPLv3).
+
+
+INSTALLER
+---------
+Le plus simple : lancer « JSG Guitar Setup.exe » et laisser cochée la case
+« Plug-in VST3 ». L'installateur le copie dans
+    C:\Program Files\Common Files\VST3\JSG Guitar.vst3
+
+À la main : copier le dossier « JSG Guitar.vst3 » (tout le dossier) dans
+C:\Program Files\Common Files\VST3 (confirmation administrateur).
+
+Puis, dans le logiciel musical : relancer la recherche des plug-ins.
+   JSG Guitar apparaît chez l'éditeur « JSG », catégorie Guitare /
+   Distorsion.
+
+La fenêtre du plug-in utilise WebView2, le moteur d'affichage de Windows
+(déjà présent sur Windows 10 et 11 à jour). S'il manque, la fenêtre le dit :
+installer « Microsoft Edge WebView2 Runtime » depuis le site de Microsoft.
+
+
+CE QUI EST DANS LE PLUG-IN
+--------------------------
+- Ampli 3 canaux guitare et mode basse, baffles, micros, rooms, coupe-bas /
+  coupe-haut, IR, égaliseur 5 bandes, rack (noise gate, compresseur, drive,
+  chorus, delay, reverb), pédalier de 16 emplacements, accordeur, presets.
+- Les 129 réglages sont automatisables (noms en français) ; « Contourner »
+  est reconnu par le logiciel.
+- Tout est enregistré dans le projet : réglages, pédales posées, preset,
+  canal d'entrée, et le fichier IR lui-même (le projet s'ouvre sur un autre
+  PC sans avoir à recopier l'IR).
+- Entrée mono ou stéréo (canal choisi dans TOOLS > RÉGLAGES AUDIO),
+  sortie stéréo.
+
+Retirés par rapport à la version PC (le logiciel musical s'en charge) :
+le lecteur de morceaux, REC, les réglages de la carte son.
+
+
+LATENCE
+-------
+Le plug-in ajoute 32 échantillons (0,7 ms à 48 kHz), signalés au logiciel
+qui les compense à la lecture. Pour jouer en direct : petit tampon (64 ou
+128) dans les réglages audio du logiciel, monitoring de la piste activé.
+
+
+À VÉRIFIER (pas encore essayé dans un vrai logiciel musical)
+------------------------------------------------------------
+Le plug-in a passé les 47 tests du validateur officiel de Steinberg, en
+version Windows. Ce qui reste à essayer chez vous :
+- l'affichage de la fenêtre (WebView2) dans votre logiciel ;
+- l'automation et l'annulation (Ctrl+Z) d'un potard tourné dans la fenêtre ;
+- la réouverture d'un projet enregistré.
+Notez le logiciel et sa version si quelque chose cloche.
+
+
+RECOMPILER (dossier sources)
+----------------------------
+Avec Visual Studio 2022 (« Développement Desktop en C++ ») et git :
+double-cliquer sur sources\plugin\build.bat. Il télécharge le kit VST3 de
+Steinberg s'il manque, puis compile. Résultat :
+sources\plugin\build\VST3\Release\JSG Guitar.vst3
+
+sources\plugin  : le plug-in (paramètres, état du projet, fenêtre, tests)
+sources\moteur, sources\src, sources\third_party : le moteur audio et le
+                  serveur local, communs avec la version PC
+ui              : l'interface (la même que la version PC ; en mode plug-in,
+                  le lecteur et REC sont masqués)

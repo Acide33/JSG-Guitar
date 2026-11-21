@@ -1,0 +1,29 @@
+﻿INSTALLATEUR DE JSG GUITAR
+==========================
+
+Résultat : sortie\JSG Guitar Setup.exe, qui installe au choix
+- le logiciel JSG Guitar (Program Files),
+- le plug-in VST3 (C:\Program Files\Common Files\VST3),
+- les playbacks JSG (si le dossier « playbacks » est présent).
+
+Il faut Inno Setup 6.3 ou plus récent (gratuit) : jrsoftware.org
+
+DEUX FAÇONS DE LE FABRIQUER
+
+1. Tout recompiler depuis les sources : tout_compiler.bat
+   (Visual Studio 2022 + git + Inno Setup). Il compile le logiciel et le
+   plug-in, remplit le dossier « fichiers », puis fabrique l'installateur.
+
+2. Le dossier « fichiers » est déjà rempli : compiler_installateur.bat
+   (Inno Setup seul).
+
+AJOUTER LES PLAYBACKS JSG
+Copiez ici le dossier « playbacks » du pack « JSG Playbacks » (les MP3 et
+LICENCE.txt) avant de lancer tout_compiler.bat. Sans lui, l'installateur est
+fabriqué sans les morceaux.
+
+SIGNER AVEC LE CERTIFICAT CERTUM
+Ouvrez SimplySign Desktop et connectez-vous, puis dans une invite de commandes :
+    set JSG_CERT=Votre nom tel qu'il est dans le certificat
+    tout_compiler.bat
+Le logiciel, le plug-in et l'installateur sont alors signés et horodatés.
