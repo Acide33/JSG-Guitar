@@ -4,8 +4,9 @@ JSG GUITAR — VERSION PC (PROTOTYPE 0.1)
 Le même simulateur que la version navigateur (même moteur audio, même
 interface), mais le son passe directement par la carte son en WASAPI,
 avec le mode exclusif de Windows pour la latence la plus basse.
-JSG Guitar est un logiciel libre (licence GPLv3, voir LICENSE). Les images
-restent la propriété du groupe (LICENCE-CONTENUS.md).
+JSG Guitar est un logiciel libre (licence GPLv3, voir LICENSE ; images sous
+licence CC BY-SA 4.0, nom et logo réservés : voir LICENCE-CONTENUS.md).
+Il ne transmet aucune information sur Internet.
 
 PLAYBACKS JSG : les 8 morceaux du groupe sans la guitare forment un pack
 gratuit à part (licence CC BY-NC 4.0), sur jeromesolergroup.com. Copiez son

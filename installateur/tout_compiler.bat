@@ -11,12 +11,16 @@ rem    "JSG Playbacks" ici (installateur\playbacks\*.mp3 + LICENCE.txt)
 rem  - signature Certum : ouvrez SimplySign Desktop, puis lancez ce script avec
 rem      set JSG_CERT=Votre nom tel qu'il est dans le certificat
 rem      tout_compiler.bat
+rem  - par etapes (signature SignPath dans la compilation GitHub) :
+rem      set JSG_ETAPE=fichiers      compile et remplit "fichiers", sans installateur
+rem      set JSG_ETAPE=installateur  fabrique seulement l'installateur depuis "fichiers"
 setlocal EnableExtensions
 cd /d "%~dp0"
 set "SRC=%~dp0..\sources"
 set "UI=%~dp0..\ui"
 set "OUT=%~dp0fichiers"
 
+if /i "%JSG_ETAPE%"=="installateur" goto etape_installateur
 where cmake >nul 2>nul || (echo CMake introuvable : installez Visual Studio avec "Developpement Desktop en C++". & goto erreur)
 
 echo.
@@ -60,8 +64,16 @@ if exist "%~dp0playbacks\*.mp3" (
 if defined JSG_CERT call :signtool || goto erreur
 if defined JSG_CERT call :signer "%OUT%\app\JSG Guitar.exe" "%OUT%\vst3\JSG Guitar.vst3\Contents\x86_64-win\JSG Guitar.vst3" || goto erreur
 
+if /i "%JSG_ETAPE%"=="fichiers" (
+  echo.
+  echo Termine : fichiers a installer dans installateur\fichiers
+  exit /b 0
+)
+
+:etape_installateur
 echo.
 echo === 4/4  Installateur ===
+if not exist "%OUT%\app\JSG Guitar.exe" (echo Dossier "fichiers" incomplet. & goto erreur)
 set "ISCC="
 if exist "%ProgramFiles(x86)%\Inno Setup 6\ISCC.exe" set "ISCC=%ProgramFiles(x86)%\Inno Setup 6\ISCC.exe"
 if not defined ISCC if exist "%ProgramFiles%\Inno Setup 6\ISCC.exe" set "ISCC=%ProgramFiles%\Inno Setup 6\ISCC.exe"
@@ -69,6 +81,7 @@ if not defined ISCC if exist "%LOCALAPPDATA%\Programs\Inno Setup 6\ISCC.exe" set
 if not defined ISCC (echo Inno Setup 6 introuvable : installez-le depuis jrsoftware.org. & goto erreur)
 "%ISCC%" /Q "%~dp0JSGGuitar.iss" || goto erreur
 
+if defined JSG_CERT if not defined SIGNTOOL call :signtool || goto erreur
 if defined JSG_CERT call :signer "%~dp0sortie\JSG Guitar Setup.exe" || goto erreur
 
 echo.

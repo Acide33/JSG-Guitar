@@ -13,7 +13,9 @@ CE QUI VA ÊTRE INSTALLÉ (chaque partie peut être décochée à l'étape suiva
 LICENCES
 - JSG Guitar est un logiciel libre et gratuit, sous licence GNU GPL version 3 :
   vous pouvez l'utiliser, l'étudier, le modifier et le redistribuer.
-- Les images de l'interface, les noms et les logos restent la propriété du groupe.
+- Les images de l'interface sont sous licence CC BY-SA 4.0 ; les noms et logos
+  « JSG Guitar » et « JSG » restent réservés.
+- JSG Guitar ne transmet aucune information sur Internet.
 - Les playbacks JSG sont sous licence Creative Commons BY-NC 4.0 : partage et
   remix autorisés en créditant le groupe, pas d'usage commercial.
 Les textes complets sont installés avec le logiciel.

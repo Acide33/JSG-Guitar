@@ -4,7 +4,8 @@
 #   - Windows : JSG Guitar Setup.exe (logiciel + plug-in VST3)
 #   - Linux : vérification des parties communes (version de test)
 # Les fichiers produits sont dans l'onglet « Actions » (rubrique Artifacts) de chaque compilation.
-# Avec une étiquette v0.1.0, v0.2.0… ils sont aussi joints à une « Release ».
+# Avec une étiquette v0.1.0, v0.2.0… ils sont aussi joints à une « Release » (et signés par SignPath une fois
+# le projet accepté : secret SIGNPATH_API_TOKEN, variable SIGNPATH_ORGANIZATION_ID, voir .signpath/LISEZMOI.md).
 #
 # Signature Apple (facultative) : secrets du dépôt (Settings > Secrets and variables > Actions)
 #   MACOS_CERTIFICATE           certificat « Developer ID Application » exporté en .p12, encodé en base64
@@ -64,20 +65,106 @@ jobs:
   windows:
     name: Windows (installateur)
     runs-on: windows-2022
+    env:
+      # Signature SignPath : seulement pour une Release (étiquette v…), quand le secret SIGNPATH_API_TOKEN existe
+      SIGNER: ${{ secrets.SIGNPATH_API_TOKEN != '' && startsWith(github.ref, 'refs/tags/v') }}
     steps:
       - uses: actions/checkout@v7
 
       - name: Inno Setup
         run: choco install innosetup --no-progress -y
 
+      # --- Sans signature : tout d'un coup -----------------------------------
       - name: Compilation (logiciel, plug-in VST3, installateur)
+        if: env.SIGNER != 'true'
         shell: cmd
         run: installateur\tout_compiler.bat
 
-      - uses: actions/upload-artifact@v7
+      - name: Installateur (non signé)
+        if: env.SIGNER != 'true'
+        uses: actions/upload-artifact@v7
         with:
           name: JSG-Guitar-Windows
           path: installateur/sortie/JSG Guitar Setup.exe
+          if-no-files-found: error
+
+      # --- Avec signature SignPath : logiciel et plug-in, puis installateur ---
+      - name: Compilation (logiciel, plug-in VST3)
+        if: env.SIGNER == 'true'
+        shell: cmd
+        env:
+          JSG_ETAPE: fichiers
+        run: installateur\tout_compiler.bat
+
+      - name: Envoi du logiciel et du plug-in à signer
+        if: env.SIGNER == 'true'
+        id: binaires
+        uses: actions/upload-artifact@v7
+        with:
+          name: a-signer-binaires
+          path: |
+            installateur/fichiers/app/JSG Guitar.exe
+            installateur/fichiers/vst3/JSG Guitar.vst3/Contents/x86_64-win/JSG Guitar.vst3
+          if-no-files-found: error
+
+      - name: Signature du logiciel et du plug-in (SignPath)
+        if: env.SIGNER == 'true'
+        uses: signpath/github-action-submit-signing-request@v3
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'JSG-Guitar' }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG || 'release-signing' }}
+          artifact-configuration-slug: binaires
+          github-artifact-id: ${{ steps.binaires.outputs.artifact-id }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 21600   # le temps d'approuver la signature sur SignPath
+          output-artifact-directory: installateur/signes
+
+      - name: Fichiers signés à la place des originaux
+        if: env.SIGNER == 'true'
+        shell: cmd
+        run: |
+          robocopy installateur\signes installateur\fichiers /E /NJH /NJS /NFL /NDL
+          if %ERRORLEVEL% GEQ 8 exit /b 1
+          exit /b 0
+
+      - name: Installateur
+        if: env.SIGNER == 'true'
+        shell: cmd
+        env:
+          JSG_ETAPE: installateur
+        run: installateur\tout_compiler.bat
+
+      - name: Envoi de l'installateur à signer
+        if: env.SIGNER == 'true'
+        id: installateur
+        uses: actions/upload-artifact@v7
+        with:
+          name: a-signer-installateur
+          path: installateur/sortie/JSG Guitar Setup.exe
+          if-no-files-found: error
+
+      - name: Signature de l'installateur (SignPath)
+        if: env.SIGNER == 'true'
+        uses: signpath/github-action-submit-signing-request@v3
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'JSG-Guitar' }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG || 'release-signing' }}
+          artifact-configuration-slug: installateur
+          github-artifact-id: ${{ steps.installateur.outputs.artifact-id }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 21600
+          output-artifact-directory: installateur/sortie-signee
+
+      - name: Installateur (signé)
+        if: env.SIGNER == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: JSG-Guitar-Windows
+          path: installateur/sortie-signee/JSG Guitar Setup.exe
           if-no-files-found: error
 
   linux:
@@ -105,11 +192,18 @@ jobs:
     needs: [ mac, windows ]
     runs-on: ubuntu-24.04
     steps:
+      - uses: actions/checkout@v7
       - uses: actions/download-artifact@v7
         with:
+          pattern: JSG-Guitar-*
           path: fichiers
+      # Préversion : installateur Windows seulement. Le .dmg Mac sera ajouté quand il aura été essayé sur un Mac
+      # (variable du dépôt JSG_PUBLIER_MAC = true pour l'inclure).
       - uses: softprops/action-gh-release@v3
         with:
+          name: JSG Guitar ${{ github.ref_name }}
+          prerelease: ${{ vars.JSG_PRERELEASE != 'false' }}
+          body_path: installateur/NOTES-VERSION.md
           files: |
-            fichiers/JSG-Guitar-Mac/JSG Guitar.dmg
             fichiers/JSG-Guitar-Windows/JSG Guitar Setup.exe
+            ${{ vars.JSG_PUBLIER_MAC == 'true' && 'fichiers/JSG-Guitar-Mac/JSG Guitar.dmg' || '' }}

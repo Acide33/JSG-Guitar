@@ -1,4 +1,5 @@
 // Icône et informations de version de JSG Guitar.exe
+#pragma code_page(65001)
 #include <winver.h>
 
 1 ICON "jsg.ico"
@@ -17,7 +18,8 @@ BEGIN
             VALUE "FileDescription",  "JSG Guitar\0"
             VALUE "FileVersion",      "0.1.0\0"
             VALUE "ProductName",      "JSG Guitar\0"
-            VALUE "ProductVersion",   "0.1.0 (prototype sans JUCE)\0"
+            VALUE "ProductVersion",   "0.1.0\0"
+            VALUE "LegalCopyright",   "(C) 2026 Jérôme Soler - GPL v3\0"
             VALUE "OriginalFilename", "JSG Guitar.exe\0"
         END
     END

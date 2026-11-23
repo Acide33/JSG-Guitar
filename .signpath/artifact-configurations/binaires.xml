@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logiciel et plug-in VST3 (artefact GitHub « a-signer-binaires ») -->
+<artifact-configuration xmlns="http://signpath.io/artifact-configuration/v1">
+  <zip-file>
+    <directory path="app">
+      <pe-file path="JSG Guitar.exe" product-name="JSG Guitar" product-version="0.1.0">
+        <authenticode-sign/>
+      </pe-file>
+    </directory>
+    <directory path="vst3/JSG Guitar.vst3/Contents/x86_64-win">
+      <pe-file path="JSG Guitar.vst3" product-name="JSG Guitar" product-version="0.1.0">
+        <authenticode-sign/>
+      </pe-file>
+    </directory>
+  </zip-file>
+</artifact-configuration>

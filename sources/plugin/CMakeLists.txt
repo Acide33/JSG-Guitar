@@ -50,6 +50,8 @@ target_compile_features (JSGGuitar PRIVATE cxx_std_20)
 target_link_libraries (JSGGuitar PRIVATE sdk)
 
 if (WIN32)
+    enable_language (RC)
+    target_sources (JSGGuitar PRIVATE res/plugin.rc)   # version du fichier (même nom de produit et même version que le logiciel)
     target_include_directories (JSGGuitar PRIVATE "${JSG_SOURCES}/third_party/webview2")
     if (NOT MSVC)
         target_include_directories (JSGGuitar PRIVATE "${JSG_SOURCES}/third_party/webview2/compat")

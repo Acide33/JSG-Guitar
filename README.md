@@ -121,12 +121,19 @@ Compilation croisée depuis Linux ou macOS avec zig 0.13 : `sources/build_zig.sh
 | Quoi | Licence |
 |---|---|
 | Code source (`sources/src`, `sources/moteur`, `ui/js`, `ui/css`, `ui/index.html`, scripts de compilation) | **GPL v3 ou ultérieure** — voir [LICENSE](LICENSE) |
-| Images de l'interface (`ui/img`) | **Tous droits réservés** (diffusion du logiciel autorisée) — voir [LICENCE-CONTENUS.md](LICENCE-CONTENUS.md) |
+| Images de l'interface (`ui/img`) | **CC BY-SA 4.0** — voir [LICENCE-CONTENUS.md](LICENCE-CONTENUS.md) |
 | Playbacks JSG (pack séparé, non inclus dans ce dépôt) | **CC BY-NC 4.0** — voir la licence fournie avec le pack |
-| Nom « JSG Guitar », « JSG Bass », « Jérôme Soler Group » et logos | Réservés — voir [LICENCE-CONTENUS.md](LICENCE-CONTENUS.md) |
+| Nom « JSG Guitar », « JSG Bass », « Jérôme Soler Group » et logos | Marques réservées : une version modifiée doit changer de nom — voir [LICENCE-CONTENUS.md](LICENCE-CONTENUS.md) |
 | Bibliothèques incluses | Voir [LICENCES-TIERS.md](LICENCES-TIERS.md) |
 
-En bref : vous pouvez utiliser, étudier, modifier et redistribuer le **code**, à condition que vos versions restent sous GPL v3 avec leur code source. Les **visuels** ne sont pas sous licence libre ; les **playbacks** sont partagés à part, en CC BY-NC 4.0.
+En bref : vous pouvez utiliser, étudier, modifier et redistribuer le **code** (GPL v3) et les **images** (CC BY-SA 4.0), à condition que vos versions restent libres et changent de nom. Les **playbacks** sont partagés à part, en CC BY-NC 4.0.
+
+## Code signing policy
+
+Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org) (demande en cours).
+Rôles de l'équipe, fichiers signés et politique de confidentialité : **[CODE_SIGNING.md](CODE_SIGNING.md)**.
+
+**Confidentialité** : JSG Guitar ne transmet aucune information sur Internet (pas de compte, pas de statistiques, pas de mise à jour automatique).
 
 ## Contribuer
 
@@ -146,6 +153,8 @@ Les corrections et idées sont les bienvenues : voir [CONTRIBUTING.md](CONTRIBUT
 
 **Build:** Visual Studio 2022 + CMake + git (+ Inno Setup for the installer) — run `installateur\tout_compiler.bat`. macOS: Xcode + CMake — run `installateur/creer_dmg_mac.sh`. GitHub Actions builds both automatically.
 
-**License:** the source code is GPL-3.0-or-later. The interface artwork, names and logos are **not** open source (all rights reserved, redistribution with the software allowed) — see `LICENCE-CONTENUS.md`. The backing-track pack is CC BY-NC 4.0.
+**License:** source code GPL-3.0-or-later, interface artwork CC BY-SA 4.0. The names and logos "JSG Guitar" / "JSG" are reserved: forks must use another name — see `LICENCE-CONTENUS.md`. The backing-track pack is CC BY-NC 4.0.
+
+**Code signing policy:** see [CODE_SIGNING.md](CODE_SIGNING.md). **Privacy:** JSG Guitar does not send any data over the Internet.
 
 Like the software? Please listen to and share our music: **[jeromesolergroup.com](https://jeromesolergroup.com)**
