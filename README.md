@@ -157,4 +157,4 @@ Les corrections et idées sont les bienvenues : voir [CONTRIBUTING.md](CONTRIBUT
 
 **Code signing policy:** see [CODE_SIGNING.md](CODE_SIGNING.md). **Privacy:** JSG Guitar does not send any data over the Internet.
 
-Like the software? Please listen to and share our music: **[jeromesolergroup.com](https://jeromesolergroup.com)**
+Like the software? Please listen to and share our music: **[jeromesolergroup.com](http://jeromesolergroup.com)**
