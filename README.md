@@ -143,7 +143,7 @@ Les corrections et idées sont les bienvenues : voir [CONTRIBUTING.md](CONTRIBUT
 
 ## English
 
-**JSG Guitar** is a free and open-source guitar & bass amp simulator for Windows and macOS (standalone app; VST3 plug-in on Windows), made by Jérôme Soler, guitarist and singer of the French pop rock band **Jérôme Soler Group (JSG)**. The band also shares 8 JSG backing tracks without guitar as a separate free pack (**CC BY-NC 4.0**), so you can play along — download it from [jeromesolergroup.com](https://jeromesolergroup.com) and copy its `playbacks` folder into JSG Guitar's `ui` folder.
+**JSG Guitar** is a free and open-source guitar & bass amp simulator for Windows and macOS (standalone app; VST3 plug-in on Windows), made by Jérôme Soler, guitarist and singer of the French pop rock band **Jérôme Soler Group (JSG)**. The band also shares 8 JSG backing tracks without guitar as a separate free pack (**CC BY-NC 4.0**), so you can play along — download it from [jeromesolergroup.com](http://jeromesolergroup.com) and copy its `playbacks` folder into JSG Guitar's `ui` folder.
 
 - Guitar and bass amp simulation, built-in pedals, EQ, reverb, IR loader, tuner
 - Backing track player with tempo and pitch shifting, WAV / MP3 recording
