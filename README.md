@@ -50,7 +50,7 @@ Les versions prêtes à l'emploi sont dans l'onglet **[Releases](../../releases)
 Téléchargez **`JSG Guitar Setup.exe`** et lancez-le : il installe le logiciel, le plug-in VST3
 (dans `C:\Program Files\Common Files\VST3`) et, si vous le souhaitez, les playbacks JSG. Chaque partie peut être décochée.
 
-**Playbacks JSG** : ils sont proposés dans l'installateur, ou en pack gratuit séparé sur [jeromesolergroup.com](https://jeromesolergroup.com) (copiez alors son dossier `playbacks` dans le dossier `ui` de JSG Guitar). Sans eux, le logiciel fonctionne normalement et vous pouvez jouer sur vos propres morceaux.
+**Playbacks JSG** : ils sont proposés dans l'installateur, ou en pack gratuit séparé sur [jeromesolergroup.com](http://jeromesolergroup.com) (copiez alors son dossier `playbacks` dans le dossier `ui` de JSG Guitar). Sans eux, le logiciel fonctionne normalement et vous pouvez jouer sur vos propres morceaux.
 
 Configuration : Windows 10 ou 11 64 bits, une carte son avec entrée instrument. L'interface utilise WebView2, déjà présent sur Windows 10 et 11 à jour.
 
@@ -65,7 +65,7 @@ Sur Mac, les prises compressées sont en AAC (.m4a) : macOS n'a pas d'encodeur M
 
 ## Compiler
 
-Avec **Visual Studio 2022** (charge de travail « Développement Desktop en C++ »), **git** et, pour l'installateur, **[Inno Setup 6](https://jrsoftware.org/isinfo.php)** :
+Avec **Visual Studio 2022** (charge de travail « Développement Desktop en C++ »), **git** et, pour l'installateur, **[Inno Setup 6](http://jrsoftware.org/isinfo.php)** :
 
 ```bat
 installateur\tout_compiler.bat
