@@ -24,7 +24,7 @@ Discographie :
 - ***Karamel Space Rabbit*** — 2ᵉ album (2024)
 - ***AT*** — EP du Jérôme Soler Trio (2016)
 
-🎸 Site du groupe : **[jeromesolergroup.com](https://jeromesolergroup.com)**
+🎸 Site du groupe : **[jeromesolergroup.com](http://jeromesolergroup.com)**
 <!-- Ajoutez ici vos liens : Spotify, Deezer, YouTube, Bandcamp, Instagram… -->
 
 Si JSG Guitar vous plaît, le meilleur moyen de nous remercier est d'**écouter et partager notre musique**.
